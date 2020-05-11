@@ -96,3 +96,6 @@ require_once(ABSPATH . 'wp-settings.php');
 // SMTP Config
 define( 'WPMS_ON', true );
 define( 'WPMS_SMTP_PASS', 'Ikro24blan89' );
+
+// Google Maps API key
+define('GOOGLE_MAP_KEY', 'AIzaSyCUuERKpbeyDgoZ2yvXAG8aYXu9TKA122Q');

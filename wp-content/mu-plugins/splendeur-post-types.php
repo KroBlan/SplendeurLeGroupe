@@ -26,7 +26,7 @@ function bamboo_pre_get_posts( $query ) {
 }
 
 function my_acf_google_map_api($api){
-	$api['key'] = 'AIzaSyCUuERKpbeyDgoZ2yvXAG8aYXu9TKA122Q';
+	$api['key'] = GOOGLE_MAP_KEY;
 	return $api;
 }
 add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
