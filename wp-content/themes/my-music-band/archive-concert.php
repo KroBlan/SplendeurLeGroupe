@@ -33,7 +33,7 @@ get_header(); ?>
 	if (preg_match("/page/i", $link) == 1) $page = (int) str_replace("/", "", substr($link, -2));
 
 	$concerts = new WP_Query(array(
-		'posts_per_page' => 1,
+		'posts_per_page' => 3,
 	  'post_type' => 'concert',
 		'paged' => $page,
 	  'meta_key' => 'event_date',
@@ -131,7 +131,7 @@ endif; ?>
 	jQuery(document).ready(function(){
 		jQuery('.custom-header-content').css('padding', '4em 50px');
 		jQuery('#content .wrapper').css('padding-bottom', '0');
-		jQuery('.entry-title').html('Prochains Concerts');
+		jQuery('.section-title').html('Prochains Concerts');
 	});
 </script>
 <?php

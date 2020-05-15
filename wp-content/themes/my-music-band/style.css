@@ -10313,6 +10313,28 @@ to {
 /* Singular Pages */
 .singular-content-wrap .entry-content { text-align: justify; }
 
+/* Singular Concert Page */
+.single-concert-header { height: 150px; }
+.single-concert-primary .entry-content {
+	text-align: center;
+	font-size: 25px;
+	color: #ddd;
+}
+#single-event-address { text-align: center; }
+#event-location .acf-map { height: 280px; }
+@media screen and (min-width: 48.9375em) {
+	#single-event-address {
+		padding: 20px 50px;
+		vertical-align: middle;
+		margin-top: -330px;
+	}
+	#single-event-address, #event-location .acf-map {
+		display: inline-block !important;
+		width: 49%;
+	}
+	.single-concert-primary { margin-top: -50px !important; }
+}
+
 /* ACF Google Maps Integration */
 .acf-map {
     width: 100%;

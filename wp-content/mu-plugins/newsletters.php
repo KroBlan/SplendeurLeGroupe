@@ -55,24 +55,23 @@ if(!function_exists('kv_email_subscription_fn')) {
 
 				$blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 
-				$subject = sprintf(__('New Subscription on %s','kvc'), $blogname);
+				$subject = sprintf(__('Vous êtes bien inscrit à la newsletter de Splendeur Le Groupe','kvc'), $blogname);
 
 				$to = get_option('admin_email');
 
 				// $headers = 'From: '. sprintf(__('%s Admin', 'kvc'), $blogname) .' <No-repy@'.$_SERVER['SERVER_NAME'] .'>' . PHP_EOL;
 				$headers = array('Content-Type: text/html; charset=UTF-8');
-
-				$message = '<style>body {background-color: blue;}</style>';
-				$message .= '<body>';
-				$message .= '<h1 style="color: red;">TITRE ROUGE</h1>';
-				$message .= sprintf(__('Hi ,', 'kvc')) . PHP_EOL . PHP_EOL;
-				$message .= sprintf(__('You have a new subscription on your %s website.', 'kvc'), $blogname) . PHP_EOL . PHP_EOL;
-				$message .= __('Email Details', 'kvc') . PHP_EOL;
-				$message .= __('-----------------') . PHP_EOL;
-				$message .= __('User E-mail: ', 'kvc') . stripslashes($_POST['subscriber_email']) . PHP_EOL;
-				$message .= __('Regards,', 'kvc') . PHP_EOL . PHP_EOL;
-				$message .= sprintf(__('Your %s Team', 'kvc'), $blogname) . PHP_EOL;
-				$message .= trailingslashit(get_option('home')) . PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL;
+				$message = '<style></style>';
+				$message .= '<body style>';
+				// $message .= '<h1 style="color: red;">TITRE ROUGE</h1>';
+				// $message .= sprintf(__('Hi ,', 'kvc')) . PHP_EOL . PHP_EOL;
+				// $message .= sprintf(__('You have a new subscription on your %s website.', 'kvc'), $blogname) . PHP_EOL . PHP_EOL;
+				// $message .= __('Email Details', 'kvc') . PHP_EOL;
+				// $message .= __('-----------------') . PHP_EOL;
+				// $message .= __('User E-mail: ', 'kvc') . stripslashes($_POST['subscriber_email']) . PHP_EOL;
+				// $message .= __('Regards,', 'kvc') . PHP_EOL . PHP_EOL;
+				// $message .= sprintf(__('Your %s Team', 'kvc'), $blogname) . PHP_EOL;
+				// $message .= trailingslashit(get_option('home')) . PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL;
 				$message .= '</body>';
 
 				if (wp_mail($to, $subject, $message, $headers)){
@@ -82,7 +81,7 @@ if(!function_exists('kv_email_subscription_fn')) {
 				}	else	{
 				   echo "<script>alert('Email pas envoyé: " . $_POST['subscriber_email'] . "')</script>";
 				}
-			}else{
+			} else {
         // Pop-up d'alerte si l'email semble invalide
         echo"<script>";
         echo"alert('Votre email" . $_POST['subscriber_email'] . " semble invalide et n'a pas été ajouté.

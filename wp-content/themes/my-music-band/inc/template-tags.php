@@ -30,10 +30,15 @@ if ( ! function_exists( 'my_music_band_posted_on' ) ) :
 		$post_author_id = get_post_field( 'post_author', $post_id );
 
 		$byline = '<span class="author vcard"><span class="screen-reader-text">Byline</span><a class="url fn n" href="' . esc_url( get_author_posts_url( $post_author_id ) ) . '">' . esc_html( get_the_author_meta( 'nickname', $post_author_id ) ) . '</a></span>';
+		$concert_date_style = "";
+		if (is_singular($post_types = 'concert')) :
+			$eventDate = explode(' ', get_field('event_date'));
+			$posted_on = $eventDate[1].' '.$eventDate[2].' '.$eventDate[3];
+			$concert_date_style = ' style="font-size: 20px; font-weight: bold;"';
+		endif;
+		echo '<span class="posted-on"'.$concert_date_style.'>' . '<span class="screen-reader-text">' . esc_html__( 'Posted-on', 'my-music-band' ) . '</span>' . $posted_on . '</span>';
 
-		echo '<span class="posted-on">' . '<span class="screen-reader-text">' . esc_html__( 'Posted-on', 'my-music-band' ) . '</span>' . $posted_on . '</span>';
-
-		echo '<span class="byline">' . '<span class="screen-reader-text">' . esc_html__( 'By line', 'my-music-band' ) . '</span>' . $byline . '</span>';
+		// echo '<span class="byline">' . '<span class="screen-reader-text">' . esc_html__( 'By line', 'my-music-band' ) . '</span>' . $byline . '</span>';
 	}
 endif;
 
@@ -243,10 +248,10 @@ function my_music_band_footer_content() {
 	$footer_content = sprintf( _x( 'Copyright &copy; %1$s %2$s', '1: Year, 2: Site Title with home URL', 'my-music-band' ), '[the-year]', '[site-link]', '[privacy-policy-link]' ) . '<span class="sep"> | </span>' . $theme_data->get( 'Name' ) . '&nbsp;' . esc_html__( 'by', 'my-music-band' ) . '&nbsp;<a target="_blank" href="' . $theme_data->get( 'AuthorURI' ) . '">' . esc_html( $theme_data->get( 'Author' ) ) . '</a>';
 
 	$search  = array( '[the-year]', '[site-link]', '[privacy-policy-link]' );
-	$replace = array( 
-		esc_attr( date_i18n( __( 'Y', 'my-music-band' ) ) ), 
-		'<a href="'. esc_url( home_url( '/' ) ) .'">'. esc_attr( get_bloginfo( 'name', 'display' ) ) . '</a>', 
-		function_exists( 'get_the_privacy_policy_link' ) ? get_the_privacy_policy_link() : '' 
+	$replace = array(
+		esc_attr( date_i18n( __( 'Y', 'my-music-band' ) ) ),
+		'<a href="'. esc_url( home_url( '/' ) ) .'">'. esc_attr( get_bloginfo( 'name', 'display' ) ) . '</a>',
+		function_exists( 'get_the_privacy_policy_link' ) ? get_the_privacy_policy_link() : ''
 	);
 
 	$footer_content = str_replace( $search, $replace, $footer_content );

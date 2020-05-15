@@ -9,16 +9,21 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+	<div id="primary" class="content-area single-concert-primary">
 		<main id="main" class="site-main">
 			<div class="singular-content-wrap">
 				<?php
 				while ( have_posts() ) : the_post();
 				$location = get_field('event_location');
 				if( $location ): ?>
+				<div id="event-location">
+					<div id="single-event-address">
+						<h2><?php echo esc_attr($location['address']); ?></h2>
+					</div>
 					<div class="acf-map" data-zoom="16">
 							<div class="marker" data-lat="<?php echo esc_attr($location['lat']); ?>" data-lng="<?php echo esc_attr($location['lng']); ?>"></div>
 					</div>
+				</div>
 				<?php endif;
 
 					get_template_part( 'template-parts/content/content', 'single' );
@@ -161,6 +166,10 @@ get_header(); ?>
 	    $('.acf-map').each(function(){
 	        var map = initMap( $(this) );
 	    });
+			$('.single-concert-primary .nav-previous .nav-subtitle').html("concert precedent");
+			$('.single-concert-primary .nav-next .nav-subtitle').html("concert suivant");
+			// $('.header-media').css('height', '250px');
+			$('.custom-header-content').css('padding', '50px 50px');
 	});
 
 	})(jQuery);
