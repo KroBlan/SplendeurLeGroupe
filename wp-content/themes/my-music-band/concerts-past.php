@@ -39,7 +39,7 @@ get_header(); ?>
 		'meta_query' => array(
 	    array(
 	      'key' => 'event_date',
-				'compare' => '>=',
+				'compare' => '<',
 	      'value' => $date,
 	      'type' => 'DATE'
 	    )
@@ -47,7 +47,11 @@ get_header(); ?>
 	));
 	if ($concerts->have_posts()) :
 	?>
+
 	<div class="section-content-wrapper">
+		<span id="incoming-dates-span" class="dates-span">
+			<a class="past-incoming-dates" href="<?php echo get_site_url().'/incoming-dates'; ?>">Prochains Concerts &#x203A;</a>
+		</span>
 		<div id="infinite-post-wrap" class="archive-post-wrap">
 			<?php
 			/* Start the Loop */

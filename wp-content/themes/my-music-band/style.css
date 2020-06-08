@@ -10264,6 +10264,16 @@ to {
 }
 
 /* Events (Concerts) Section */
+#incoming-dates-span { text-align: right; }
+.dates-span {
+	display: block;
+	height: 50px;
+}
+.past-incoming-dates-link {
+	 /* position: absolute; */
+	 margin-top: -2.6em;
+	 z-index: 100;
+}
 #archive-event-map-link { color: #7b7b7b; }
 #archive-event-map-link:hover { color: #1a90d7; }
 #single-concert .entry-content p {

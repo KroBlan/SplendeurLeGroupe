@@ -47,6 +47,9 @@ get_header(); ?>
 	));
 	if ($concerts->have_posts()) :
 	?>
+	<span class="dates-span">
+		<a class="past-incoming-dates" href="<?php echo get_site_url().'/past-dates'; ?>">&#x2039; Concerts Passés</a>
+	</span>
 	<div class="section-content-wrapper">
 		<div id="infinite-post-wrap" class="archive-post-wrap">
 			<?php
@@ -140,7 +143,7 @@ endif; ?>
 jQuery(document).ready(function(){
 	jQuery('.custom-header-content').css('padding', '4em 50px');
 	jQuery('#content .wrapper').css('padding-bottom', '0');
-	jQuery('.entry-title.section-title').html('Concerts Passées');
+	jQuery('h1.entry-title').html('Prochains Concerts');
 });
 </script>
 <?php
