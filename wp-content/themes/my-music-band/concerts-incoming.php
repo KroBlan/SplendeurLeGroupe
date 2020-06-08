@@ -1,11 +1,7 @@
 <?php
 /**
-* The template for displaying archive pages
-*
-* @link https://codex.wordpress.org/Template_Hierarchy
-*
-* @package My Music Band
-*/
+ * Template Name: Incoming Concerts
+ */
 
 get_header(); ?>
 
@@ -18,7 +14,7 @@ get_header(); ?>
 		if ( 'disable' === $header_image ) : ?>
 
 		<header class="page-header">
-			<?php the_archive_title( '<h2 class="page-title section-title">', '</h2>' ); ?>
+			<?php the_archive_title( '<h2 id="banner-title" class="page-title section-title">', '</h2>' ); ?>
 
 			<div class="taxonomy-description-wrapper">
 				<?php the_archive_description(); ?>
@@ -32,28 +28,40 @@ get_header(); ?>
 	$page = 1;// Getting page number from url for pagination
 	if (preg_match("/page/i", $link) == 1) $page = (int) str_replace("/", "", substr($link, -2));
 
+	$date = date('Ymd');
 	$concerts = new WP_Query(array(
-		'posts_per_page' => 3,
-	  'post_type' => 'concert',
+		'posts_per_page' => 5,
+		'post_type' => 'concert',
 		'paged' => $page,
-	  'meta_key' => 'event_date',
-	  'orderby' => 'meta_value_num',
-	  'order' => 'ASC'
+		'meta_key' => 'event_date',
+		'orderby' => 'meta_value_num',
+		'order' => 'ASC',
+		'meta_query' => array(
+	    array(
+	      'key' => 'event_date',
+				'compare' => '>=',
+	      'value' => $date,
+	      'type' => 'DATE'
+	    )
+	  )
 	));
-
-	if ($concerts->have_posts()) : ?>
+	if ($concerts->have_posts()) :
+	?>
 	<div class="section-content-wrapper">
 		<div id="infinite-post-wrap" class="archive-post-wrap">
 			<?php
 			/* Start the Loop */
 			while ($concerts->have_posts()) : $concerts->the_post();
 
-			$eventDate = explode(' ', get_field('event_date'));
+			$monthNum = substr(get_field('event_date'), 4, 2);
+			$mois = array('01' => 'Janvier', '02' => 'Février', '03' => 'Mars', '04' => 'Avril', '05' => 'Mai', '06' => 'Juin',
+			'07' => 'Juillet', '08' => 'Août', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Décembre');
+
 			$location = get_field('event_location');
 			$address = '';
 			foreach( array('city', 'country') as $i => $k ) {
-					if(isset($location[$k]))
-						$address .= sprintf('<span class="segment-%s">%s</span>, ', $k, $location[$k]);
+				if(isset($location[$k]))
+				$address .= sprintf('<span class="segment-%s">%s</span>, ', $k, $location[$k]);
 			}
 			$address = trim( $address, ', ' );// Trim trailing comma.
 			?>
@@ -68,12 +76,12 @@ get_header(); ?>
 										<a>
 											<div class="entry-date">
 												<div class="mobile-inline">
-													<p><strong style="margin-bottom: 0; margin-top: 3px;"><?php echo $eventDate[1]; ?></strong></p>
-													<p><?php echo $eventDate[2]; ?><br></p>
-													<p style="font-size: 15px;"><b><?php echo $eventDate[3]; ?></b></p>
+													<p><strong style="margin-bottom: 0; margin-top: 3px;"><?php echo substr(get_field('event_date'), 6, 8); ?></strong></p>
+													<p><?php echo $mois[$monthNum]; ?><br></p>
+													<p style="font-size: 15px;"><b><?php echo substr(get_field('event_date'), 0, 4); ?></b></p>
 												</div>
 												<p style="margin-bottom: 0; line-height: 90%;">-</p>
-												<p style="font-size: 16px;"><b><?php echo $eventDate[4]; ?></b></p>
+												<p style="font-size: 16px;"><b><?php echo get_field('event_time'); ?></b></p>
 											</div>
 										</a>
 									</span>
@@ -85,17 +93,17 @@ get_header(); ?>
 										</h2>
 									</div>
 									<?php if ($address != "") { ?>
-									<div class="event-list-item-venue">
-										<div class="entry-summary">
-											<p>
-												<a id="archive-event-map-link" href="https://www.google.com/maps/place/<?php echo $location['address']; ?>" target="_blank">
-												<i class="fa fa-map-marker" style="font-size: 36px; margin-right: 0.2em;"></i>
-												<?php echo $address; ?>
-												</a>
-											</p>
+										<div class="event-list-item-venue">
+											<div class="entry-summary">
+												<p>
+													<a id="archive-event-map-link" href="https://www.google.com/maps/place/<?php echo $location['address']; ?>" target="_blank">
+														<i class="fa fa-map-marker" style="font-size: 36px; margin-right: 0.2em;"></i>
+														<?php echo $address; ?>
+													</a>
+												</p>
+											</div>
 										</div>
-									</div>
-								<?php } ?>
+									<?php } ?>
 								</div>
 								<div class="event-list-item-actions">
 									<a href="<?php the_permalink(); ?>" class="more-link"><span class="more-button">En Savoir plus</span></a>
@@ -112,11 +120,12 @@ get_header(); ?>
 			* If you want to override this in a child theme, then include a file
 			* called content-___.php (where ___ is the Post Format name) and that will be used instead.
 			*/
-		endwhile;
-		if (function_exists('wp_pagenavi')) wp_pagenavi(array('query' => $concerts));
-		wp_reset_postdata();
-		?>
-	</div><!-- .archive-post-wrap -->
+		// }
+	endwhile;
+	if (function_exists('wp_pagenavi')) wp_pagenavi(array('query' => $concerts));
+	wp_reset_postdata();
+	?>
+</div><!-- .archive-post-wrap -->
 </div><!-- .section-content-wrap -->
 
 <?php
@@ -128,11 +137,11 @@ endif; ?>
 </div><!-- .archive-posts-wrapper -->
 </div><!-- .primary-->
 <script>
-	jQuery(document).ready(function(){
-		jQuery('.custom-header-content').css('padding', '4em 50px');
-		jQuery('#content .wrapper').css('padding-bottom', '0');
-		jQuery('.section-title').html('Prochains Concerts');
-	});
+jQuery(document).ready(function(){
+	jQuery('.custom-header-content').css('padding', '4em 50px');
+	jQuery('#content .wrapper').css('padding-bottom', '0');
+	jQuery('.entry-title.section-title').html('Concerts Passées');
+});
 </script>
 <?php
 get_sidebar();

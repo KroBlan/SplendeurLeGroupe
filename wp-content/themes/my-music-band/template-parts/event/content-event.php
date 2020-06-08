@@ -25,13 +25,18 @@ $concertsNumber = 0; // To limit the concerts displayed on home page
       <?php
       while ($concerts->have_posts() && $concertsNumber < 4) {
         if ($concertsNumber == 3) {
-          echo '<p class="view-more"><a class="more-recent-posts button" href="'.get_post_type_archive_link('concert').'">TOUS LES CONCERTS</a></p>';
+          echo '<p class="view-more"><a class="more-recent-posts button" href="'.get_site_url().'/incoming-dates">TOUS LES CONCERTS</a></p>';
           $concertsNumber++;
         } else {
           $concerts->the_post();
           $eventDate = explode(' ', get_field('event_date'));
           if ($eventDate[0] >= date('Ymd')) {// Si la date du concert n'est pas passée
             $concertsNumber++;
+
+            $monthNum = substr(get_field('event_date'), 4, 2);
+      			$mois = array('01' => 'Janvier', '02' => 'Février', '03' => 'Mars', '04' => 'Avril', '05' => 'Mai', '06' => 'Juin',
+      			'07' => 'Juillet', '08' => 'Août', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Décembre');
+
             $location = get_field('event_location');
       			$address = '';
       			foreach( array('city', 'country') as $i => $k ) {
@@ -48,14 +53,14 @@ $concertsNumber = 0; // To limit the concerts displayed on home page
                   <span class="posted-on">
                     <a>
                       <div class="entry-date">
-                        <div class="mobile-inline">
-                          <p><strong style="margin-bottom: 0; margin-top: 3px;"><?php echo $eventDate[1]; ?></strong></p>
-                          <p><?php echo $eventDate[2]; ?><br></p>
-                          <p style="font-size: 15px;"><b><?php echo $eventDate[3]; ?></b></p>
-                        </div>
-                        <p style="margin-bottom: 0; line-height: 90%;">-</p>
-                        <p style="font-size: 16px;"><b><?php echo $eventDate[4]; ?></b></p>
-                      </div>
+												<div class="mobile-inline">
+													<p><strong style="margin-bottom: 0; margin-top: 3px;"><?php echo substr(get_field('event_date'), 6, 8); ?></strong></p>
+													<p><?php echo $mois[$monthNum]; ?><br></p>
+													<p style="font-size: 15px;"><b><?php echo substr(get_field('event_date'), 0, 4); ?></b></p>
+												</div>
+												<p style="margin-bottom: 0; line-height: 90%;">-</p>
+												<p style="font-size: 16px;"><b><?php echo get_field('event_time'); ?></b></p>
+											</div>
                     </a>
                   </span>
                 </div>
