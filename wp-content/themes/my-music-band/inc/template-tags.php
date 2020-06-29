@@ -32,9 +32,16 @@ if ( ! function_exists( 'my_music_band_posted_on' ) ) :
 		$byline = '<span class="author vcard"><span class="screen-reader-text">Byline</span><a class="url fn n" href="' . esc_url( get_author_posts_url( $post_author_id ) ) . '">' . esc_html( get_the_author_meta( 'nickname', $post_author_id ) ) . '</a></span>';
 		$concert_date_style = "";
 		if (is_singular($post_types = 'concert')) :
-			$eventDate = explode(' ', get_field('event_date'));
-			$posted_on = $eventDate[1].' '.$eventDate[2].' '.$eventDate[3];
+			// $eventDate = explode(' ', get_field('event_date'));
+			// $posted_on = $eventDate[1].' '.$eventDate[2].' '.$eventDate[3];
 			$concert_date_style = ' style="font-size: 20px; font-weight: bold;"';
+
+			$monthNum = substr(get_field('event_date'), 4, 2);
+
+			$mois = array('01' => 'Janvier', '02' => 'Février', '03' => 'Mars', '04' => 'Avril', '05' => 'Mai', '06' => 'Juin',
+			'07' => 'Juillet', '08' => 'Août', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Décembre');
+
+			$posted_on = substr(get_field('event_date'), 6, 8) .' '. $mois[$monthNum] .' '. substr(get_field('event_date'), 0, 4);
 		endif;
 		echo '<span class="posted-on"'.$concert_date_style.'>' . '<span class="screen-reader-text">' . esc_html__( 'Posted-on', 'my-music-band' ) . '</span>' . $posted_on . '</span>';
 
@@ -245,7 +252,7 @@ if ( ! function_exists( 'my_music_band_footer_content' ) ):
 function my_music_band_footer_content() {
 	$theme_data = wp_get_theme();
 
-	$footer_content = sprintf( _x( 'Copyright &copy; %1$s %2$s', '1: Year, 2: Site Title with home URL', 'my-music-band' ), '[the-year]', '[site-link]', '[privacy-policy-link]' ) . '<span class="sep"> | </span>' . $theme_data->get( 'Name' ) . '&nbsp;' . esc_html__( 'by', 'my-music-band' ) . '&nbsp;<a target="_blank" href="' . $theme_data->get( 'AuthorURI' ) . '">' . esc_html( $theme_data->get( 'Author' ) ) . '</a>';
+	$footer_content = sprintf( _x( 'Copyright &copy; %1$s %2$s', '1: Year, 2: Site Title with home URL', 'my-music-band' ), '[the-year]', '[site-link]', '[privacy-policy-link]' ) . '<span class="sep"></span></a>';
 
 	$search  = array( '[the-year]', '[site-link]', '[privacy-policy-link]' );
 	$replace = array(

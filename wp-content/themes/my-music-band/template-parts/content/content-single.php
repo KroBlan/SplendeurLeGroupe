@@ -12,9 +12,10 @@
 	<?php
 		$header_image = my_music_band_featured_overall_image();
 
-		if ( 'disable' === $header_image ) : ?> 
+		if ( 'disable' === $header_image ) : ?>
 
 		<header class="entry-header">
+			<h2>HELLLLOOOOO</h2>
 			<?php the_title( '<h1 class="entry-title section-title">', '</h1>' ); ?>
 
 			<?php
@@ -29,7 +30,7 @@
 	<?php endif; ?>
 	<?php my_music_band_single_image(); ?>
 
-	<div class="entry-content">
+	<div class="entry-content" style="text-align: justify;">
 		<?php
 			the_content( sprintf(
 				wp_kses(

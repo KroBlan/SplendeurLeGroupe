@@ -100,7 +100,7 @@ get_header(); ?>
 											<div class="entry-summary">
 												<p>
 													<a id="archive-event-map-link" href="https://www.google.com/maps/place/<?php echo $location['address']; ?>" target="_blank">
-														<i class="fa fa-map-marker" style="font-size: 36px; margin-right: 0.2em;"></i>
+														<i id="event-location-marker" class="fa fa-map-marker"></i>
 														<?php echo $address; ?>
 													</a>
 												</p>

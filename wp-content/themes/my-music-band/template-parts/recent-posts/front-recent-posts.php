@@ -8,7 +8,7 @@
 <div class="recent-blog-content archive-posts-wrapper section">
 	<div class="wrapper">
 		<?php
-		$post_title = 'Recent Posts'; ?>
+		$post_title = 'Dernier Article'; ?>
 
 			<div class="section-heading-wrapper">
 				<h2 class="section-title"><?php echo esc_html( $post_title ); ?></h2>
@@ -17,9 +17,13 @@
 			<div id="infinite-post-wrap" class="archive-post-wrap">
 				<?php
 				$recent_posts = new WP_Query( array(
-					'ignore_sticky_posts' => true,
+					'ignore_sticky_posts' => true
 				) );
-
+				$more_articles = $recent_posts->post_count > 1 ? TRUE : FALSE;
+				$recent_posts = new WP_Query( array(
+					'posts_per_page' => 1,
+					'order' => 'DESC',
+				) );
 				/* Start the Loop */
 				while ( $recent_posts->have_posts() ) :
 					$recent_posts->the_post();
@@ -35,12 +39,12 @@
 										<span class="sticky-post"><?php esc_html_e( 'Featured', 'my-music-band' ); ?></span>
 									<?php } ?>
 
-									<?php if ( 'post' === get_post_type() ) : ?>
-									<div class="entry-meta">
-										<?php my_music_band_cat_list(); ?>
-									</div><!-- .entry-meta -->
+									<?php //if ( 'post' === get_post_type() ) : ?>
+									<!-- <div class="entry-meta"> -->
+										<?php //my_music_band_cat_list(); ?>
+									<!-- </div> --><!-- .entry-meta -->
 									<?php
-									endif; ?>
+									//endif; ?>
 
 									<?php
 									if ( is_singular() ) :
@@ -97,6 +101,13 @@
 				?>
 			</div><!-- .archive-post-wrap -->
 		</div><!-- .section-content-wrap -->
-		<p class="view-more"><a class="more-recent-posts button" href="<?php the_permalink( get_option( 'page_for_posts' ) ); ?>"><?php esc_html_e( 'More Posts', 'my-music-band' ); ?></a></p>
+		<?php if ($more_articles) { ?>
+		<p class="view-more"><a class="more-recent-posts button" href="<?php echo get_site_url().'/articles'; ?>"><?php esc_html_e( 'Plus d\'articles de Splendeur', 'my-music-band' ); ?></a></p>
+		<?php } ?>
 	</div> <!-- .wrapper -->
 </div> <!-- .recent-blog-content-wrapper -->
+<script>
+	jQuery(document).ready(function() {
+		jQuery('.readmore').html('Lire la suite');
+	});
+</script>

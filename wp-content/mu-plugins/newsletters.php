@@ -94,15 +94,15 @@ if(!function_exists('kv_email_subscription_fn')) {
 
 			<form id="newsletter-footer" action="" method="POST">
 
-				<h5><strong>Sign up</strong> for email updates</h5>
+				<!-- <h5><strong>Sign up</strong> for email updates</h5> -->
 				<div class="newsletter-form">
 
 					<div class="newsletter-email" style="margin-bottom:10px; " >
-						<input type="email" name="subscriber_email" placeholder="Email address">
+						<input type="email" name="subscriber_email" placeholder="Entrez votre mail pour vous inscrire à la newsletter">
 					</div>
 					<div class="newsletter-submit">
 							<input type="hidden" name="kv_submit_subscription" value="Submit">
-							<input type="submit" name="submit_form" value="Submit">
+							<input type="submit" name="submit_form" value="Je m'inscris à la newsletter">
 					</div>
 				</div>
 			</form>

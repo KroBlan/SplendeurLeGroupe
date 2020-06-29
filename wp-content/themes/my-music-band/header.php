@@ -46,6 +46,9 @@
 						didScroll = false;
 						if (window.scrollY<=0) {
 							jQuery('#masthead').removeClass('nav-down').addClass('nav-up');
+							if (jQuery('#slide-arrow').hasClass('slide-arrow-up')) {
+								jQuery('#slide-arrow').removeClass('slide-arrow-up').addClass('slide-arrow-down');
+							}
 						}
 				}
 			}, 250);
@@ -63,23 +66,49 @@
 					if (st > lastScrollTop && st > navbarHeight) {
 							// Scroll Down
 							jQuery('#masthead').removeClass('nav-down').addClass('nav-up');
+							if (jQuery('#slide-arrow').hasClass('slide-arrow-up')) {
+								jQuery('#slide-arrow').removeClass('slide-arrow-up').addClass('slide-arrow-down');
+							}
 					} else {
 							// Scroll Up
 							if(st + jQuery(window).height() < jQuery(document).height()) {
 									jQuery('#masthead').removeClass('nav-up').addClass('nav-down');
+									if (jQuery('#slide-arrow').hasClass('slide-arrow-down')) {
+										jQuery('#slide-arrow').removeClass('slide-arrow-down').addClass('slide-arrow-up');
+									}
 							}
 					}
 				}
 				lastScrollTop = st;
 			}
+			jQuery( document ).ready(function() {
+				jQuery('#slide-nav-container').click(function() {
+				  if (jQuery('#masthead').hasClass('nav-up')) {
+						jQuery('#masthead').removeClass('nav-up').addClass('nav-down');
+						if (jQuery('#slide-arrow').hasClass('slide-arrow-down')) {
+							jQuery('#slide-arrow').removeClass('slide-arrow-down').addClass('slide-arrow-up');
+						}
+					} else {
+						jQuery('#masthead').removeClass('nav-down').addClass('nav-up');
+						if (jQuery('#slide-arrow').hasClass('slide-arrow-up')) {
+							jQuery('#slide-arrow').removeClass('slide-arrow-up').addClass('slide-arrow-down');
+						}
+					}
+				});
+			});
 		</script>
 		<div class="site-header-main">
-			<div class="wrapper">
+			<div class="wrapper" style="padding-bottom: 0;">
 				<?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
 
 				<?php get_template_part( 'template-parts/navigation/navigation', 'primary' ); ?>
 			</div><!-- .wrapper -->
 		</div><!-- .site-header-main -->
+		<div id="slide-nav-container">
+			<div id ="slide-arrow" class="slide-arrow-down">
+
+			</div>
+		</div>
 	</header><!-- #masthead -->
 
 	<div class="below-site-header">

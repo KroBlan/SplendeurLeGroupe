@@ -974,7 +974,7 @@ td {
 
 .site-content .wrapper,
 .author-info {
-	padding: 42px 30px;
+	padding: 0 30px;
 }
 
 .footer-widget-area {
@@ -3446,7 +3446,7 @@ body:not(.home) .header-media .wrapper::after {
 
 .site-info {
 	letter-spacing: 0.1em;
-	padding: 21px 30px;
+	padding: 10px 30px;
 	text-transform: uppercase;
 	text-align: center;
 }
@@ -8833,7 +8833,7 @@ dl.variation p {
 	}
 
 	.navigation-classic .main-navigation a {
-		padding: 28px 20px;
+		padding: 28px 20px 15px 20px;
 		line-height: 2;
 	}
 
@@ -10023,6 +10023,7 @@ ins {
 /*
 | Kro Blan's add-on css ->
 */
+.site-main { margin-top: 15px; }
 
 h2 .entry-title section-title {
 	-webkit-hyphens: normal;
@@ -10030,8 +10031,9 @@ h2 .entry-title section-title {
 	-ms-hyphens: normal;
 	hyphens: normal;
 }
-/* .custom-header-content { min-height: 720px; width: 100%;} */
-
+/* .header-media { margin-bottom: 30px; } */
+.events-section-headline { margin-top: 50px; }
+.site-description { color: #575757; }
 .nav-up { top: -5.25em; }
 .nav-down { top: 0; }
 #masthead {
@@ -10043,8 +10045,44 @@ h2 .entry-title section-title {
 	opacity: 80%;
   transition: top 0.3s linear;
 }
-/* Slide button with arrow for the top navigation bar */
+.site-header-main .wrapper { padding-top: 0; }
 #slide-nav-container {
+	margin-top: -8px;
+	height: 0.9em;
+	background-color: #000;
+  transition: top 0.3s linear;
+	text-align: center;
+	z-index: 1000;
+	cursor: pointer;
+}
+#slide-arrow {
+	color: #888 !important;
+	position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+	width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-top: 7px solid;
+  border-right: 7px solid;
+	/* margin-left: 27px; */
+	transition: all 1.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+}
+.slide-arrow-down {
+	margin-top: 8px;
+	transform-origin: center center;
+	transform: rotate(135deg);
+}
+.slide-arrow-up {
+	margin-top: -8px;
+	transform-origin: center center;
+	transform: rotate(-45deg);
+}
+@media screen and (max-width: 64em) { #slide-nav-container { margin-top: -16px; } }
+@media screen and (max-width: 48em) { #slide-nav-container { margin-top: -8px; } }
+/* Slide button with arrow for the top navigation bar */
+/* #slide-nav-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -10056,15 +10094,14 @@ h2 .entry-title section-title {
 	margin-left: -25px;
 	padding-left: 7px;
 	transition: all 0.3s ease 0s;
-	z-in
-}
-.slide-nav-up { top: -21px; height: 1px;}
+} */
+/* .slide-nav-up { top: -21px; height: 1px;}
 @media screen and (max-width: 75em) { #slide-nav-container { margin-top: -4px; } }
 @media screen and (max-width: 64em) { #slide-nav-container { margin-top: -1px; } }
 @media screen and (max-width: 48em) { #slide-nav-container { margin-top: 7px; } }
-@media screen and (max-width: 255px) { #slide-nav-container { margin-top: 0px; } }
+@media screen and (max-width: 255px) { #slide-nav-container { margin-top: 0px; } } */
 
-#slide-nav-arrow-icon {
+/* #slide-nav-arrow-icon {
 	width: 2.8em;
 	display: block;
 	padding: 0.5em;
@@ -10134,7 +10171,7 @@ h2 .entry-title section-title {
 .open-slide-nav-down #slide-nav-right-bar:after {
  transform-origin: center center;
  transform: rotate(0deg);
-}
+} */
 
 /* Animated arrows down in the header -> */
 .chevron-container {
@@ -10224,7 +10261,6 @@ to {
 #scroll-to-playlist {
 	height: 80px;
 	width: 30px;
-	margin-left: 30px;
 	cursor: pointer;
 }
 
@@ -10284,9 +10320,14 @@ to {
 .section-heading-wrapper .events-section-headline { padding-top: 0!important; }
 .events-content-wrapper, #events-content-area { padding: 0; }
 .entry-date p { margin-bottom: 0; }
+#event-location-marker {
+	font-size: 36px;
+	margin-right: 0.2em;
+}
 @media screen and (max-width: 64em) {
   #events-content-area { padding: 0 30px; }
-	.event-list-description { padding: 40px 0; }
+	#event-location-marker { font-size: 24px; }
+	.event-title { margin-bottom: 20px; }
 	.mobile-inline {
 		white-space: nowrap;
 		overflow-x: auto;
@@ -10321,13 +10362,13 @@ to {
 .recent-blog-content .wrapper { padding-top: 0; }
 
 /* Singular Pages */
-.singular-content-wrap .entry-content { text-align: justify; }
+.singular-content-wrap .entry-content { text-align: justify; color: #ddd; }
 
 /* Singular Concert Page */
 .single-concert-header { height: 150px; }
 .single-concert-primary .entry-content {
 	text-align: center;
-	font-size: 25px;
+	font-size: 1.125rem;
 	color: #ddd;
 }
 #single-event-address { text-align: center; }
@@ -10366,6 +10407,15 @@ to {
 	font-size: 25px;
 	margin: 0 7px;
 }
+
+/* Newsletter */
+.newsletter-form { padding: 0.5em 8em 0 8em; }
+@media screen and (max-width: 48em) {
+	.newsletter-form { padding: 0.5em 25px 0 25px; }
+}
+.newsletter-submit { text-align: center; }
+.social-navigation { margin-bottom: 10px !important; }
+#footer-blue-line { margin: 20px auto !important; }
 
 /*
 <- Kro Blan's add-on css |

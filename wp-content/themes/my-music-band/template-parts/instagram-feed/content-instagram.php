@@ -1,5 +1,5 @@
 <div id="content" class="site-content">
-  <div class="wrapper">
+  <div class="wrapper" style="padding-bottom: 0;">
 
     <div id="primary" class="content-area">
       <main id="main" class="site-main">
